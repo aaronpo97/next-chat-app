@@ -1,23 +1,49 @@
+import { AuthError, UserCredential } from "firebase/auth";
 import type { NextPage } from "next";
 import Head from "next/head";
-import React from "react";
+import React, { FC } from "react";
+
+import { FaGoogle } from "react-icons/fa";
+
+import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { auth } from "../config/firebase";
+
+import Link from "next/link";
+import MainChatArea from "../components/main-chat-area/MainChatArea";
+import Sidebar from "../components/sidebar/Sidebar";
 
 const Home: NextPage = () => {
-   return (
-      <div className="h-screen flex flex-col items-center bg-base-300 justify-center">
-         <div className="flex flex-col items-center">
-            <div className="flex flex-col items-center my-12">
-               <h1 className="text-6xl mb-6">The Chat App</h1>
-               <aside className="italic">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-               </aside>
-            </div>
+   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+   const onLoginClick = async () => {
+      await signInWithGoogle(undefined, { prompt: "select_account" });
+   };
 
-            <div>
-               <button className="btn">Sign in with Google</button>
+   return (
+      <>
+         {user && (
+            <div className="">
+               <Head>
+                  <title>Chat App</title>
+               </Head>
+
+               <div className="flex h-screen w-screen">
+                  <Sidebar />
+               </div>
             </div>
-         </div>
-      </div>
+         )}
+         {!user && (
+            <div className="flex h-screen w-screen items-center justify-center">
+               <button
+                  className="btn gap-2"
+                  onClick={onLoginClick}
+                  aria-label="Sign in with Google"
+               >
+                  <FaGoogle />
+                  Sign in with Google
+               </button>
+            </div>
+         )}
+      </>
    );
 };
 

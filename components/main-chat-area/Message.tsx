@@ -1,16 +1,21 @@
 import React, { FC } from "react";
 
-const Message: FC<{ incomingMessage: boolean; content: string }> = ({
-   incomingMessage = false,
+const Message: FC<{ content: string; messageId: string; authorId: string }> = ({
    content,
+   messageId,
+   authorId,
 }) => {
+   const incomingMessage = Math.random() > 0.5;
+
    return (
       <div
          className={`w-fit ${
-            incomingMessage ? "self-start bg-gray-500" : "self-end bg-blue-900"
+            incomingMessage ? "self-start bg-secondary" : "self-end bg-primary"
          } mx-4 my-1 p-3 rounded-full`}
       >
-         <p>{content}</p>
+         <p className={`${incomingMessage ? "text-secondary-content" : "text-primary-content"}`}>
+            {content}
+         </p>
       </div>
    );
 };

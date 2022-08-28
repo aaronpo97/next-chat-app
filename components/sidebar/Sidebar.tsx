@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import Avatar from "../ui/Avatar";
 import ChatList from "./ChatList";
 
+import { MdOutlineLogout } from "react-icons/md";
 const Sidebar: FC = () => {
    return (
       <div className="w-[400px] bg-base-300 h-full flex flex-col ">
@@ -12,8 +13,8 @@ const Sidebar: FC = () => {
                </Avatar>
                <p className="font-semibold text-xl">Jimmy Doe</p>
             </div>
-            <button type="button" className="btn rounded-full">
-               Logout
+            <button type="button" className="btn rounded-full gap-2" aria-label="Logout">
+               <MdOutlineLogout className="" aria-hidden="true" focusable="false" />
             </button>
          </div>
          <div className="flex flex-col items-center w-full">

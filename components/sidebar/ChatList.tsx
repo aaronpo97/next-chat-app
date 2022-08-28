@@ -6,7 +6,7 @@ const ChatList: FC = () => {
       <div className="overflow-x-scroll flex flex-col grow">
          {
             // temporary until I get actual users
-            Array.from("x".repeat(25)).map(value => {
+            Array.from("x".repeat(2)).map(value => {
                return <ChatNameBox key={Math.random()} />;
             })
          }
